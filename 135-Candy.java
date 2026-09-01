@@ -12,12 +12,10 @@ class Solution {
         int curr = 1, r = 1;
         int ans = Math.max(1,l[n-1]);
         for(int i=n-2;i>=0;i--){
-            if(ratings[i] > ratings[i+1]){
+            if(ratings[i] > ratings[i+1])
                 curr = r+1;
-                r = curr;
-            }
             else curr = 1;
-                
+            r = curr; 
             ans += Math.max(curr,l[i]);
         }
         
