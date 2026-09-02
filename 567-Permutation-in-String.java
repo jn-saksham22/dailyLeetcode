@@ -1,30 +1,27 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
-        int[] freq = new int[26];
-        for(char c : s1.toCharArray()){
-            freq[c - 'a']++;
-        }
-        int windsize = s1.length();
-        for(int i=0;i<s2.length();i++){
-            int windIdx = 0, idx = i;
-            int[] windfreq = new int[26];
- 
-            while(windIdx < windsize && idx < s2.length()){
-                  windfreq[s2.charAt(idx) - 'a']++;
-                  windIdx++;
-                  idx++;
-            }
+       int n1 = s1.length();
+       int n2 = s2.length();
+       if(n1 > n2) return false;
 
-            if(isFreqSame(freq,windfreq))
-              return true;
-        }
-        return false;
-    }
-    public boolean isFreqSame(int[] freq1,int[] freq2){
-        for(int i=0;i<26;i++){
-            if(freq1[i] != freq2[i])
-              return false;
-        }
-        return true;
+       int cnt1[] = new int[26];
+       int cnt2[] = new int[26];
+
+       for(int i=0;i<n1;i++){
+         cnt1[s1.charAt(i)-'a']++;
+         cnt2[s2.charAt(i)-'a']++;
+       }
+
+       if(Arrays.equals(cnt1,cnt2)) return true;
+       int j = 0;
+
+       for(int i=n1;i<n2;i++){
+          cnt2[s2.charAt(i)-'a']++;
+          cnt2[s2.charAt(j)-'a']--;
+
+          if(Arrays.equals(cnt1,cnt2)) return true;
+          j++;
+       } 
+       return false;
     }
 }
