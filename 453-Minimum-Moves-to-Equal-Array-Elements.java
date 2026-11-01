@@ -4,13 +4,12 @@ class Solution {
         int n = nums.length;
         int minEl = nums[0];
 
-        for(int i=1; i<n; i++){
-            if(nums[i] < minEl) minEl = nums[i];
+        int sum = 0;
+        for(int num : nums){
+            if(num < minEl) minEl = num;
+
+            sum += num;
         }
-        int op = 0;
-        for(int i=0;i<n;i++){
-            op += nums[i] - minEl;
-        }
-        return op;
+        return sum - (minEl * n);
     }
 }
