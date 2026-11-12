@@ -38,12 +38,22 @@ class Solution {
         if(root.val == key){
             return helper(root);
         }
-        if(key < root.val){
-            root.left = deleteNode(root.left, key);
-        }
-        else 
-            root.right =  deleteNode(root.right, key);
+        TreeNode curr = root;
 
+        while(curr != null){
+            if(curr.val > key){
+                if(curr.left != null && curr.left.val == key){
+                    curr.left = helper(curr.left);
+                }
+                else curr = curr.left;
+            }
+            else {
+                if(curr.right != null && curr.right.val == key){
+                    curr.right = helper(curr.right);
+                }
+                else curr = curr.right;
+            }
+        }
         return root;
     }
 }
